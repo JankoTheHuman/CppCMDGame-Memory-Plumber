@@ -140,6 +140,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CppCMDGame.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="InitProgram.cpp" />
+    <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="LevelFundamental.cpp" />
+    <ClCompile Include="MemoryEater.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Player.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="InitProgram.h" />
+    <ClInclude Include="Level1.h" />
+    <ClInclude Include="LevelFundamental.h" />
+    <ClInclude Include="MemoryEater.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
