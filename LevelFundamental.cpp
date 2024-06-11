@@ -1,5 +1,7 @@
 ﻿#include "LevelFundamental.h"
 
+
+
 LevelFundamental::LevelFundamental()
 {	//(height, width, y_coordinate, x_coordinate)
 
@@ -11,17 +13,23 @@ LevelFundamental::LevelFundamental()
 	box(howToPlayWindow, 0, 0);
 	playerStatsWindow = newwin(7, COLS, LINES - 7, 0);
 	box(playerStatsWindow, 0, 0);
-
 	keypad(levelWindow, true);
+
+	//nodelay(levelWindow, true);
+	//wtimeout(levelWindow, 50);
 
 	p = new Player();
 	won = false;
 	input = -2;
 	blink = false;
+	cLookStena = '@' | COLOR_PAIR(13);
 
 }
 
 void LevelFundamental::clearAllWindows() {
+	this_thread::sleep_for(chrono::milliseconds(1000));
+
+	ungetch('n');
 	werase(levelWindow);
 	wrefresh(levelWindow);
 
@@ -37,29 +45,7 @@ void LevelFundamental::clearAllWindows() {
 
 void LevelFundamental::drawEverythingButLevelWin()
 {
-	//memory
-	init_pair(5, COLOR_BLUE, COLOR_BLACK);
 
-	//player
-	init_pair(6, COLOR_CYAN, COLOR_BLACK);
-
-	//checkpoint
-	init_pair(7, COLOR_BLACK, COLOR_CYAN);
-
-	//municija
-	init_pair(8, COLOR_YELLOW, COLOR_BLACK);
-
-	//zivot
-	init_pair(9, COLOR_RED, COLOR_WHITE);
-
-	//snake
-	init_pair(10, COLOR_GREEN, COLOR_WHITE);
-
-	//demon
-	init_pair(11, COLOR_RED, COLOR_MAGENTA);
-
-	//top
-	init_pair(12, COLOR_RED, COLOR_BLACK);
 
 
 	//memoryEaterWindow
@@ -118,22 +104,23 @@ void LevelFundamental::drawEverythingButLevelWin()
 	mvwprintw(howToPlayWindow, 12, 5, "S");
 	wattroff(howToPlayWindow, COLOR_PAIR(10));
 
-	mvwprintw(howToPlayWindow, 12, 7, "= SNAKE neprijatelj");
+	mvwprintw(howToPlayWindow, 12, 7, "= SNAKE (horiz-vert)");
 
 	wattron(howToPlayWindow, COLOR_PAIR(11));
 	mvwprintw(howToPlayWindow, 13, 5, "D");
 	wattroff(howToPlayWindow, COLOR_PAIR(11));
 
-	mvwprintw(howToPlayWindow, 13, 7, "= DEMON neprijatelj");
+	mvwprintw(howToPlayWindow, 13, 7, "= DEMON (random)");
 
 	wattron(howToPlayWindow, COLOR_PAIR(12));
-	mvwprintw(howToPlayWindow, 14, 5, "O");
+	mvwprintw(howToPlayWindow, 14, 5, "X");
 	wattroff(howToPlayWindow, COLOR_PAIR(12));
 
 	mvwprintw(howToPlayWindow, 14, 7, "= TOP (neunistiv)");
 
 
-	mvwprintw(howToPlayWindow, 16, 5, "@ = pomerljiva stena");
+	mvwaddch(howToPlayWindow, 16, 5, '@' | COLOR_PAIR(13));
+	mvwprintw(howToPlayWindow, 16, 6, " = pomerljiva stena");
 
 
 	wattron(howToPlayWindow, COLOR_PAIR(5));
@@ -155,13 +142,13 @@ void LevelFundamental::drawEverythingButLevelWin()
 	//playerStatsWindow
 	wattron(playerStatsWindow, COLOR_PAIR(8));
 	mvwprintw(playerStatsWindow, 2, 10, "Municija:");
-	mvwprintw(playerStatsWindow, 4, 13, "5");
+	mvwprintw(playerStatsWindow, 4, 13, "10");
 	wattroff(playerStatsWindow, COLOR_PAIR(8));
 
 
 	wattron(playerStatsWindow, COLOR_PAIR(9));
 	mvwprintw(playerStatsWindow, 2, 30, "Zivota:");
-	mvwprintw(playerStatsWindow, 4, 33, "3");
+	mvwprintw(playerStatsWindow, 4, 33, "5");
 	wattroff(playerStatsWindow, COLOR_PAIR(9));
 
 

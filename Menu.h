@@ -4,6 +4,7 @@
 
 #include "LevelFundamental.h"
 #include "Level1.h"
+#include "playMusic.h"
 
 using namespace std;
 
@@ -18,7 +19,6 @@ private:
 	WINDOW* menuWindow;
 	bool enterPressed;
 	bool exit;
-
 	//klasa roditelj u koju mogu da se smeste leveli, (upcasting?)
 	LevelFundamental* currentLevel;
 public:

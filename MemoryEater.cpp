@@ -8,6 +8,7 @@ vector<int*> MemoryEater::allocatedMemory;
 bool MemoryEater::eating = false;
 
 
+
 const char* MemoryEater::getMbOfAllocatedMemory()
 {
 	static string MB;
@@ -18,7 +19,9 @@ const char* MemoryEater::getMbOfAllocatedMemory()
 void MemoryEater::ReleaseAllMemory()
 {
 	for (int* memory : allocatedMemory) {
-		delete[] memory;
+		if (memory != NULL) {
+			delete[] memory;
+		}
 	}
 	allocatedMemory.clear();
 	sizeOfAllocatedMemory = 0;

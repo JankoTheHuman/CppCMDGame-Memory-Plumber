@@ -26,7 +26,10 @@ int main()
 	meni.drawMenu();
 
 
+	MemoryEater::toLeak = false;
 
+	// Give some time for the detached thread to notice the change in the flag and exit
+	std::this_thread::sleep_for(std::chrono::seconds(1));
 
 	return 0;
 }

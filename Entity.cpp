@@ -1,11 +1,14 @@
 #include "Entity.h"
 
 
-Entity::Entity() {
+Entity::Entity(int setY = 0, int setX = 0) {
 
 	health = 1;
-	curLocX = 0;
-	curLocY = 0;
+	curLocX = setX;
+	curLocY = setY;
 	died = false;
 	cLook = 'N';
+	facingDirection = -1;
+
+
 }

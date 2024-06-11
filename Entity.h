@@ -8,13 +8,12 @@ public:
 	int curLocY;
 	bool died;
 	chtype cLook;
+	int facingDirection;
 
-	Entity();
 
-	virtual void moveUp(WINDOW* levelWindow) = 0;
-	virtual void moveDown(WINDOW* levelWindow) = 0;
-	virtual void moveLeft(WINDOW* levelWindow) = 0;
-	virtual void moveRight(WINDOW* levelWindow) = 0;
+	Entity(int setY, int setX);
+
+
 
 };
 

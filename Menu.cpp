@@ -6,12 +6,12 @@ Menu::Menu()
 	exit = false;
 	highlight = 0;
 	options[0] = "   POCNI IGRU   ";
-	options[1] = "<-   NIVO 1   ->";
+	options[1] = "<-  TEZINA 1  ->";
 	options[2] = "     IZADJI     ";
 
-	nivoi[0] = "<    NIVO 1    >";
-	nivoi[1] = "<    NIVO 2    >";
-	nivoi[2] = "<    NIVO 3    >";
+	nivoi[0] = "<-  TEZINA 1  ->";
+	nivoi[1] = "<-  TEZINA 2  ->";
+	nivoi[2] = "<-  TEZINA 3  ->";
 
 	trenutniNivo = 0;
 
@@ -22,11 +22,12 @@ Menu::Menu()
 	wrefresh(menuWindow);
 	keypad(menuWindow, true);
 
+
 }
 
 void Menu::drawMenuBasic() {
-	init_pair(99, COLOR_YELLOW, COLOR_BLACK);
-	wattron(menuWindow, COLOR_PAIR(99));
+	
+	wattron(menuWindow, COLOR_PAIR(8));
 
 	mvwprintw(menuWindow, 5, 10, "     '||    ||'                                                '||''|.  '||                      '||                      ");
 	mvwprintw(menuWindow, 6, 10, "      |||  |||    ....  .. .. ..     ...   ... ..  .... ...     ||   ||  ||  ... ...  .. .. ..    || ...    ....  ... ..  ");
@@ -36,7 +37,7 @@ void Menu::drawMenuBasic() {
 	mvwprintw(menuWindow, 10, 10, "                                                   .. |                                                                ");
 	mvwprintw(menuWindow, 11, 10, "                                                    ''                                                                 ");
 
-	wattroff(menuWindow, COLOR_PAIR(99));
+	wattroff(menuWindow, COLOR_PAIR(8));
 
 
 
@@ -57,9 +58,7 @@ void Menu::drawMenu()
 
 
 	int j;
-	init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	init_pair(2, COLOR_GREEN, COLOR_BLACK);
-	init_pair(3, COLOR_RED, COLOR_BLACK);
+
 
 	//ceo program se vrti u ovoj petlji, unutrasnji while je za meni, spoljasnji za kreiranje
 	//  levela nakon cega oni preuzimaju crtanje
@@ -163,6 +162,8 @@ void Menu::drawMenu()
 				enterPressed = true;
 				if (highlight == 2) {
 					endwin();
+
+					playMusic::keepPlaying = false;
 					exit = true;
 				}
 				else if (highlight == 0) {
@@ -178,15 +179,15 @@ void Menu::drawMenu()
 		//pravljenje levela i ulazenje u njihove metode crtanja, kraj tih metoda je nastavah while(1)
 		//  petlje i kasnije while crtanje menija petlje
 		if (highlight == 0) {
-			if (trenutniNivo == 0) {
-				trenutniNivo = 0;
-				MemoryEater::toLeak = true;
-				MemoryEater::StartEatingMemory();
-				currentLevel = new Level1();
-				MemoryEater::ReleaseAllMemory();
-				delete currentLevel;
-				currentLevel = nullptr;
-			}
+			//if (trenutniNivo == 0) {
+				//trenutniNivo = 0;
+			MemoryEater::toLeak = true;
+			MemoryEater::StartEatingMemory();
+			currentLevel = new Level1(trenutniNivo);
+			MemoryEater::ReleaseAllMemory();
+			delete currentLevel;
+			currentLevel = nullptr;
+			//}
 
 		}
 	}
